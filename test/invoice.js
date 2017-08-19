@@ -38,6 +38,32 @@ describe('Invoice', function (){
     });
   });
 
+  describe('#addChannel()', function () {
+    it('should add channel with valid parameters', function (done){
+      var setup = new Setup({made: 'test'});
+      var store = new Store({name: 'Magasin Chez Sandra', returnURL: 'http://ma-super-boutique.com/callback'});
+      var invoice = new Invoice(setup, store);
+      invoice.addChanel('wari');
+      invoice.addChanel('orange-money-senegal');
+      assert.strictEqual(invoice.channels[0], 'wari');
+      assert.strictEqual(invoice.channels[1], 'orange-money-senegal');
+      done();
+    });
+  });
+
+  describe('#addChannels()', function () {
+    it('should add channels with valid parameters', function (done){
+      var setup = new Setup({made: 'test'});
+      var store = new Store({name: 'Magasin Chez Sandra', returnURL: 'http://ma-super-boutique.com/callback'});
+      var invoice = new Invoice(setup, store);
+      invoice.addChanels(['wari', 'orange-money-senegal', 'card']);
+      assert.strictEqual(invoice.channels[0], 'wari');
+      assert.strictEqual(invoice.channels[1], 'orange-money-senegal');
+      assert.strictEqual(invoice.channels[2], 'card');
+      done();
+    });
+  });
+
   describe('#addCustomData', function () {
     it('should add custom data', function (done){
       var setup = new Setup({made: 'test'});
